@@ -1,7 +1,5 @@
 import { pgTable, serial, text } from 'drizzle-orm/pg-core'
 
-export const courses = pgTable('courses', {
+export const bida = pgTable('bb_bids', {
   id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  imageSrc: text('image_src').notNull(),
 })
