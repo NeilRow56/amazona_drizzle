@@ -1,7 +1,28 @@
-export default function Home() {
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import db from '@/db/drizzle'
+import { bids as bidsSchema } from '@/db/schema'
+import { revalidatePath } from 'next/cache'
+
+export default async function Home() {
+  const bids = await db.query.bids.findMany()
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-4xl font-semibold text-primary">Home Page</h1>
+    <main className="container mx-auto py-12">
+      <form
+        action={async (formData: FormData) => {
+          'use server'
+
+          await db.insert(bidsSchema).values({})
+          revalidatePath('/')
+        }}
+      >
+        <Input name="bid" placeholder="Bid" />
+        <Button type="submit">Place Bid</Button>
+      </form>
+
+      {bids.map((bid) => (
+        <div key={bid.id}>{bid.id}</div>
+      ))}
     </main>
   )
 }
