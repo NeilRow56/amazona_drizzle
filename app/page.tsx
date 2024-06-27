@@ -1,28 +1,37 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import db from '@/db/drizzle'
-import { bids as bidsSchema } from '@/db/schema'
+import { bids as bidsSchema, items } from '@/db/schema'
+import { auth, currentUser } from '@clerk/nextjs'
 import { revalidatePath } from 'next/cache'
 
 export default async function Home() {
-  const bids = await db.query.bids.findMany()
+  const { userId } = await auth()
+  const user = await currentUser()
+  if (!userId || !user) {
+    throw new Error('Unauthorized')
+  }
+  const allItems = await db.query.items.findMany()
   return (
-    <main className="container mx-auto py-12">
+    <div className="container mx-auto py-12">
       <form
         action={async (formData: FormData) => {
           'use server'
 
-          await db.insert(bidsSchema).values({})
+          await db.insert(items).values({
+            name: formData.get('name') as string,
+            userId,
+          })
           revalidatePath('/')
         }}
       >
-        <Input name="bid" placeholder="Bid" />
-        <Button type="submit">Place Bid</Button>
+        <Input name="name" placeholder="Name your item" />
+        <Button type="submit">Post Item</Button>
       </form>
 
-      {bids.map((bid) => (
-        <div key={bid.id}>{bid.id}</div>
+      {allItems.map((item) => (
+        <div key={item.id}>{item.name}</div>
       ))}
-    </main>
+    </div>
   )
 }
