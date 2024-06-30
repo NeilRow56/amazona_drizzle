@@ -21,9 +21,6 @@ const CreateBidPage = () => {
           await fetch(uploadUrl, {
             method: 'PUT',
             body: file,
-            headers: {
-              'Content-Type': file.type,
-            },
           })
 
           const name = formData.get('name') as string
