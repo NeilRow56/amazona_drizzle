@@ -25,6 +25,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'files.edgestore.dev',
       },
+      {
+        protocol: 'https',
+        hostname: 'd86b0d95ae5a56451cebf362702df2ac.r2.cloudflarestorage.com',
+        port: '',
+      },
     ],
   },
 }

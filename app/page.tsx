@@ -1,3 +1,4 @@
+import { ItemCard } from '@/components/ItemCard'
 import db from '@/db/drizzle'
 
 import { auth, currentUser } from '@clerk/nextjs'
@@ -14,9 +15,7 @@ export default async function HomePage() {
       <h2 className="mb-4 text-2xl font-semibold">Items for Sale</h2>
       <div className="grid grid-cols-4 gap-8">
         {allItems.map((item) => (
-          <div className="rounded-xl border p-8" key={item.id}>
-            {item.name} - starting price: £{item.startingPrice}
-          </div>
+          <ItemCard key={item.id} item={item} />
         ))}
       </div>
     </div>

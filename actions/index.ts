@@ -1,14 +1,25 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
-
 import { items } from '@/db/schema'
 
 import { redirect } from 'next/navigation'
 import db from '@/db/drizzle'
 import { auth, currentUser } from '@clerk/nextjs'
+import { getSignedUrlForS3Object } from '@/lib/s3'
 
-export async function createItemAction(formData: FormData) {
+export async function createUploadUrlAction(key: string, type: string) {
+  return await getSignedUrlForS3Object(key, type)
+}
+
+export async function createItemAction({
+  fileName,
+  name,
+  startingPrice,
+}: {
+  fileName: string
+  name: string
+  startingPrice: any
+}) {
   const { userId } = await auth()
   const user = await currentUser()
   if (!userId || !user) {
@@ -16,9 +27,9 @@ export async function createItemAction(formData: FormData) {
   }
 
   await db.insert(items).values({
-    name: formData.get('name') as string,
-
-    startingPrice: formData.get('startingPrice') as any,
+    name,
+    startingPrice,
+    fileKey: fileName,
     userId,
   })
 
