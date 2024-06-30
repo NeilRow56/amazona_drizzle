@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation'
 import db from '@/db/drizzle'
 import { auth, currentUser } from '@clerk/nextjs'
 import { getSignedUrlForS3Object } from '@/lib/s3'
+import { revalidatePath } from 'next/cache'
 
 export async function createUploadUrlAction(key: string, type: string) {
   return await getSignedUrlForS3Object(key, type)
@@ -32,6 +33,6 @@ export async function createItemAction({
     fileKey: fileName,
     userId,
   })
-
+  revalidatePath('/')
   redirect('/')
 }

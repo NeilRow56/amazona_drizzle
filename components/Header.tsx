@@ -34,6 +34,15 @@ export const Header = async () => {
               </h2>
             </Link>
           </Button>
+
+          <Link
+            href="/auctions"
+            className="flex items-center gap-x-3 pb-7 pl-4 pt-8"
+          >
+            <h2 className="text-sm font-semibold tracking-wide text-blue-600 text-foreground hover:text-blue-800">
+              My Auctions
+            </h2>
+          </Link>
         </div>
         <div className="flex gap-8">
           <div className="flex items-center gap-1">
@@ -51,8 +60,8 @@ export const Header = async () => {
             <SignedOut>
               <SignInButton
                 mode="modal"
-                afterSignInUrl="/bids"
-                afterSignUpUrl="/bids"
+                afterSignInUrl="/auctions"
+                afterSignUpUrl="/auctions"
               >
                 <Button size="lg" variant="ghost">
                   Login

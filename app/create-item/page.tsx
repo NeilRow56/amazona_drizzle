@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 
 const CreateBidPage = () => {
   return (
-    <div className="container mx-auto py-12">
+    <div className="space-t-8 container mx-auto py-12">
       <h1 className="mb-4 text-4xl font-bold">Post an Item to Sell</h1>
       <form
         className="mb-4 flex max-w-lg flex-col space-y-4 rounded-xl border p-8"

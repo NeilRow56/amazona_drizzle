@@ -2,6 +2,8 @@ import { Item } from '@/db/schema'
 import { getImageUrl } from '@/lib/files'
 
 import Image from 'next/image'
+import { Button } from './ui/button'
+import Link from 'next/link'
 
 export function ItemCard({ item }: { item: Item }) {
   return (
@@ -14,6 +16,9 @@ export function ItemCard({ item }: { item: Item }) {
       />
       <h2 className="text-xl font-bold">{item.name}</h2>
       <p className="text-lg">starting price: £{item.startingPrice}</p>
+      <Button asChild>
+        <Link href={`/create-item/${item.id}`}>Place Bid</Link>
+      </Button>
     </div>
   )
 }
