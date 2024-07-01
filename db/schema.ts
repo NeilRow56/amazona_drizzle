@@ -10,6 +10,7 @@ export const items = pgTable('bb_items', {
   name: text('name').notNull(),
   fileKey: text('fileKey').notNull(),
   startingPrice: numeric('endPrice', { precision: 100, scale: 2 }),
+  bidInterval: integer('bidInterval').notNull().default(100),
 })
 
 export type Item = typeof items.$inferSelect

@@ -18,8 +18,10 @@ export default async function MyAuctionPage() {
 
   const hasItems = allItems.length > 0
   return (
-    <div className="container mx-auto py-12">
-      <h2 className="mb-4 text-2xl font-semibold">Your Current Auctions</h2>
+    <div className="">
+      <h2 className="mb-4 space-y-8 text-2xl font-semibold">
+        Your Current Auctions
+      </h2>
       {hasItems ? (
         <div className="grid grid-cols-4 gap-8">
           {allItems.map((item) => (

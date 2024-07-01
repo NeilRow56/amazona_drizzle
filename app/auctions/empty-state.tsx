@@ -13,7 +13,7 @@ export function EmptyState() {
       />
       <h2 className="text-2xl font-bold">You have no auctions yet</h2>
       <Button asChild>
-        <Link href="create-item">Create Auction</Link>
+        <Link href="#">Create Auction</Link>
       </Button>
     </div>
   )
